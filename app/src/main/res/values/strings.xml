@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">VocaBuilder</string>
+    <string name="word_details">Word Details</string>
+    <string name="definition">Definition</string>
+    <string name="synonyms">Synonyms</string>
+    <string name="antonyms">Antonyms</string>
+    <string name="example">Example Usage</string>
+    <string name="loading">Loading...</string>
+    <string name="error_loading">Failed to load. Please try again.</string>
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="app_tagline">Expand your vocabulary</string>
+    <string name="read_more">Read more →</string>
+    <string name="show_less">Show Less</string>
+    <string name="complete_definitions">Complete Definitions</string>
+    <string name="complete_examples">All Examples</string>
+</resources>

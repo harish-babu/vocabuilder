@@ -1,0 +1,21 @@
+// Legacy buildscript block kept for backward compatibility
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.9.1'
+    }
+}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '8.9.1' apply false
+}
+
+
+
+// Task for cleaning the project
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}

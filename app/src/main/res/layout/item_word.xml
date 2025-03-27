@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvWord"
+            style="@style/WordTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Ephemeral" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="@color/colorAccent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="48dp"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/definition"
+                    style="@style/SectionTitleStyle"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/tvDefinition"
+                    style="@style/DefinitionTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Lasting for a very short time; brief or fleeting. Something that lasts for a very brief time." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start|center_vertical">
+                    
+                    <TextView
+                        android:id="@+id/tvShowMoreDefinitions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/read_more"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:background="@android:color/transparent"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example"
+                    style="@style/SectionTitleStyle"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/tvExample"
+                    style="@style/ExampleTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="The ephemeral nature of fireworks makes them all the more special. The joy of winning was ephemeral." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start|center_vertical">
+                    
+                    <TextView
+                        android:id="@+id/tvShowMoreExamples"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/read_more"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:background="@android:color/transparent"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/synonyms"
+                    style="@style/SectionTitleStyle"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/tvSynonyms"
+                    style="@style/SynonymTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Fleeting, transient, momentary, brief, short-lived" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/antonyms"
+                    style="@style/SectionTitleStyle"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/tvAntonyms"
+                    style="@style/AntonymTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    tools:text="Permanent, enduring, eternal, everlasting, lasting" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
