@@ -7,22 +7,40 @@ import java.util.List;
 
 public class Word {
     private String word;
+    private String phonetic;
+    private String partOfSpeech;
     private List<String> definitions;
     private List<String> examples;
     private List<String> synonyms;
     private List<String> antonyms;
 
-    public Word(String word, List<String> definitions, List<String> examples, 
+    public Word(String word, String phonetic, String partOfSpeech, List<String> definitions, List<String> examples, 
                List<String> synonyms, List<String> antonyms) {
         this.word = word;
+        this.phonetic = phonetic;
+        this.partOfSpeech = partOfSpeech;
         this.definitions = definitions;
         this.examples = examples;
         this.synonyms = synonyms;
         this.antonyms = antonyms;
     }
+    
+    // Add a constructor that maintains backward compatibility with existing code
+    public Word(String word, List<String> definitions, List<String> examples, 
+               List<String> synonyms, List<String> antonyms) {
+        this(word, "'"+word+"'", "adj.", definitions, examples, synonyms, antonyms);
+    }
 
     public String getWord() {
         return word;
+    }
+    
+    public String getPhonetic() {
+        return phonetic;
+    }
+    
+    public String getPartOfSpeech() {
+        return partOfSpeech;
     }
 
     public List<String> getDefinitions() {

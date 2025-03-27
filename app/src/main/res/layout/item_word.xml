@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="16dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -31,23 +31,27 @@
             style="@style/WordTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Ephemeral" />
-
-        <View
-            android:layout_width="60dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="12dp"
-            android:background="@color/colorAccent" />
+            tools:text="taciturn" />
+            
+        <TextView
+            android:id="@+id/tvPhonetic"
+            style="@style/PhoneticTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="'tæsɪtɜ:rn" />
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:scrollbars="none"
+            android:scrollbars="vertical"
             android:requiresFadingEdge="vertical"
             android:fadingEdgeLength="48dp"
-            android:overScrollMode="never">
+            android:scrollbarThumbVertical="@color/text_secondary_light"
+            android:scrollbarStyle="outsideOverlay"
+            android:overScrollMode="always"
+            android:nestedScrollingEnabled="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,18 +59,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvPartOfSpeech"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/definition"
-                    style="@style/SectionTitleStyle"
-                    android:textAllCaps="true" />
-
-                <TextView
-                    android:id="@+id/tvDefinition"
+                    android:text="(adj.) Silent; not talkative."
                     style="@style/DefinitionTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Lasting for a very short time; brief or fleeting. Something that lasts for a very brief time." />
+                    android:layout_marginTop="24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,69 +89,24 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/example"
-                    style="@style/SectionTitleStyle"
-                    android:textAllCaps="true" />
-
-                <TextView
                     android:id="@+id/tvExample"
                     style="@style/ExampleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="The ephemeral nature of fireworks makes them all the more special. The joy of winning was ephemeral." />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-                    
-                    <TextView
-                        android:id="@+id/tvShowMoreExamples"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/read_more"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="normal"
-                        android:textSize="12sp"
-                        android:paddingTop="0dp"
-                        android:paddingBottom="8dp"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
-                        android:background="@android:color/transparent"
-                        android:visibility="gone" />
-                </LinearLayout>
+                    android:text="By nature, Sheila is a taciturn woman who keeps her thoughts to herself."
+                    android:layout_marginTop="24dp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvVocabularyLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/synonyms"
-                    style="@style/SectionTitleStyle"
-                    android:textAllCaps="true" />
-
-                <TextView
-                    android:id="@+id/tvSynonyms"
-                    style="@style/SynonymTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Fleeting, transient, momentary, brief, short-lived" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/antonyms"
-                    style="@style/SectionTitleStyle"
-                    android:textAllCaps="true" />
-
-                <TextView
-                    android:id="@+id/tvAntonyms"
-                    style="@style/AntonymTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    tools:text="Permanent, enduring, eternal, everlasting, lasting" />
+                    android:text="• vocabulary"
+                    android:textColor="@color/text_secondary_light"
+                    android:textSize="13sp"
+                    android:fontFamily="serif"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="40dp" />
 
             </LinearLayout>
         </ScrollView>

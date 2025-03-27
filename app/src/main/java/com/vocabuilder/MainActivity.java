@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewPager);
+        viewPager.setNestedScrollingEnabled(true);
+        // This improves scrolling behavior with nested ScrollView
+        viewPager.setUserInputEnabled(true);
         words = new ArrayList<>();
         adapter = new WordPagerAdapter(this, words);
         viewPager.setAdapter(adapter);

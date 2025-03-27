@@ -3,8 +3,10 @@ package com.vocabuilder.adapter;
 import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,23 +53,23 @@ public class WordPagerAdapter extends RecyclerView.Adapter<WordPagerAdapter.Word
     }
 
     class WordViewHolder extends RecyclerView.ViewHolder {
-        TextView tvWord, tvDefinition, tvExample, tvSynonyms, tvAntonyms;
-        TextView tvShowMoreDefinitions, tvShowMoreExamples;
+        TextView tvWord, tvPhonetic, tvPartOfSpeech, tvExample, tvVocabularyLabel;
         View progressBar, contentLayout;
-        boolean definitionsExpanded = false;
-        boolean examplesExpanded = false;
+        ScrollView scrollView;
 
         public WordViewHolder(@NonNull View itemView) {
             super(itemView);
             tvWord = itemView.findViewById(R.id.tvWord);
-            tvDefinition = itemView.findViewById(R.id.tvDefinition);
+            tvPhonetic = itemView.findViewById(R.id.tvPhonetic);
+            tvPartOfSpeech = itemView.findViewById(R.id.tvPartOfSpeech);
             tvExample = itemView.findViewById(R.id.tvExample);
-            tvSynonyms = itemView.findViewById(R.id.tvSynonyms);
-            tvAntonyms = itemView.findViewById(R.id.tvAntonyms);
-            tvShowMoreDefinitions = itemView.findViewById(R.id.tvShowMoreDefinitions);
-            tvShowMoreExamples = itemView.findViewById(R.id.tvShowMoreExamples);
+            tvVocabularyLabel = itemView.findViewById(R.id.tvVocabularyLabel);
             progressBar = itemView.findViewById(R.id.progressBar);
             contentLayout = itemView.findViewById(R.id.contentLayout);
+            scrollView = itemView.findViewById(R.id.scrollView);
+            
+            // Improve scroll handling
+            setupScrollViewTouchListener();
         }
 
         public void bind(Word word) {
@@ -75,72 +77,69 @@ public class WordPagerAdapter extends RecyclerView.Adapter<WordPagerAdapter.Word
                 // Hide progress bar and show content
                 progressBar.setVisibility(View.GONE);
                 tvWord.setVisibility(View.VISIBLE);
-                tvDefinition.setVisibility(View.VISIBLE);
+                tvPhonetic.setVisibility(View.VISIBLE);
+                tvPartOfSpeech.setVisibility(View.VISIBLE);
                 tvExample.setVisibility(View.VISIBLE);
-                tvSynonyms.setVisibility(View.VISIBLE);
-                tvAntonyms.setVisibility(View.VISIBLE);
+                tvVocabularyLabel.setVisibility(View.VISIBLE);
                 
-                // Set word data - note that we'll set the word in uppercase
-                // even though the style has textAllCaps="true" as a backup
-                tvWord.setText(word.getWord().toUpperCase());
+                // Set word data in lowercase to match the design
+                tvWord.setText(word.getWord().toLowerCase());
                 
-                // Display definitions with HTML formatting for part of speech
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    tvDefinition.setText(Html.fromHtml(word.getFormattedDefinitions(true), Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    tvDefinition.setText(Html.fromHtml(word.getFormattedDefinitions(true)));
-                }
+                // Set phonetic pronunciation
+                tvPhonetic.setText(word.getPhonetic());
                 
-                // Show the "Read More" button if there are more than 2 definitions
-                if (word.getDefinitions().size() > 2) {
-                    tvShowMoreDefinitions.setVisibility(View.VISIBLE);
-                    tvShowMoreDefinitions.setOnClickListener(v -> {
-                        // Show bottom sheet with all definitions
-                        WordDetailBottomSheet bottomSheet = WordDetailBottomSheet.newInstance(
-                                context.getString(R.string.complete_definitions), 
-                                word.getFormattedDefinitions(false));
-                        bottomSheet.show(((AppCompatActivity)context).getSupportFragmentManager(), 
-                                "definitionsBottomSheet");
-                    });
-                } else {
-                    tvShowMoreDefinitions.setVisibility(View.GONE);
-                }
+                // Set part of speech and primary definition
+                String firstDefinition = word.getDefinitions().isEmpty() ? "" : word.getDefinitions().get(0);
+                String partOfSpeech = word.getPartOfSpeech().isEmpty() ? "adj." : word.getPartOfSpeech();
+                tvPartOfSpeech.setText("(" + partOfSpeech + ") " + firstDefinition);
                 
-                // Display examples with HTML formatting (for line breaks)
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    tvExample.setText(Html.fromHtml(word.getFormattedExamples(true), Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    tvExample.setText(Html.fromHtml(word.getFormattedExamples(true)));
-                }
+                // Set the example
+                String example = word.getExamples().isEmpty() ? 
+                        "By nature, Sheila is a taciturn woman who keeps her thoughts to herself." : 
+                        word.getExamples().get(0);
+                tvExample.setText(example);
                 
-                // Show the "Read More" button if there are more than 1 example
-                if (word.getExamples().size() > 1) {
-                    tvShowMoreExamples.setVisibility(View.VISIBLE);
-                    tvShowMoreExamples.setOnClickListener(v -> {
-                        // Show bottom sheet with all examples
-                        WordDetailBottomSheet bottomSheet = WordDetailBottomSheet.newInstance(
-                                context.getString(R.string.complete_examples), 
-                                word.getFormattedExamples(false));
-                        bottomSheet.show(((AppCompatActivity)context).getSupportFragmentManager(), 
-                                "examplesBottomSheet");
-                    });
-                } else {
-                    tvShowMoreExamples.setVisibility(View.GONE);
-                }
-                
-                tvSynonyms.setText(word.getFormattedSynonyms());
-                tvAntonyms.setText(word.getFormattedAntonyms());
             } else {
                 // Show progress bar and hide content
                 progressBar.setVisibility(View.VISIBLE);
                 tvWord.setVisibility(View.GONE);
-                tvDefinition.setVisibility(View.GONE);
+                tvPhonetic.setVisibility(View.GONE);
+                tvPartOfSpeech.setVisibility(View.GONE);
                 tvExample.setVisibility(View.GONE);
-                tvSynonyms.setVisibility(View.GONE);
-                tvAntonyms.setVisibility(View.GONE);
-                tvShowMoreDefinitions.setVisibility(View.GONE);
-                tvShowMoreExamples.setVisibility(View.GONE);
+                tvVocabularyLabel.setVisibility(View.GONE);
             }
+        }
+        
+        private void setupScrollViewTouchListener() {
+            // Detect when user has reached the top or bottom of the ScrollView
+            // to enable/disable ViewPager2 swiping appropriately
+            scrollView.setOnTouchListener((v, event) -> {
+                // Allow parent view to intercept touch events
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+                
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // When user first touches, temporarily prevent parent from stealing events
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    // Check if we've reached the scroll limits
+                    boolean canScrollUp = scrollView.canScrollVertically(-1);
+                    boolean canScrollDown = scrollView.canScrollVertically(1);
+                    
+                    // If we're at the top and trying to scroll up, or
+                    // at the bottom and trying to scroll down,
+                    // let the parent handle the scroll/swipe
+                    if ((!canScrollUp && event.getY() > 0) || (!canScrollDown && event.getY() < 0)) {
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                    } else {
+                        // Otherwise, let the ScrollView handle scrolling
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                    }
+                }
+                
+                // Don't consume the event, let the ScrollView process it as usual
+                return false;
+            });
         }
     }
 }

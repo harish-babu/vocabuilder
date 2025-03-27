@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Primary brand colors -->
-    <color name="colorPrimary">#5D5FEF</color>
-    <color name="colorPrimaryDark">#4E50CE</color>
-    <color name="colorAccent">#FF6D92</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#757575</color>
     
     <!-- Background colors -->
-    <color name="background_light">#F8F7F3</color>
+    <color name="background_light">#EAE6D9</color>
     <color name="background_dark">#2C2C2C</color>
     
     <!-- Text colors -->
-    <color name="text_primary_light">#212121</color>
+    <color name="text_primary_light">#000000</color>
     <color name="text_secondary_light">#757575</color>
     <color name="text_primary_dark">#F8F7F3</color>
     <color name="text_secondary_dark">#D1D1D1</color>
@@ -20,11 +20,11 @@
     <color name="antonym_color">#FF5252</color>
     
     <!-- UI element colors -->
-    <color name="card_background_light">#FFFFFF</color>
+    <color name="card_background_light">#EAE6D9</color>
     <color name="card_background_dark">#3C3C3C</color>
     <color name="divider_light">#E0E0E0</color>
     <color name="divider_dark">#444444</color>
-    <color name="chip_background">#E8EAF6</color>
+    <color name="chip_background">#D9D5C8</color>
     
     <!-- Legacy colors -->
     <color name="white">#FFFFFF</color>
